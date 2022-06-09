@@ -48,6 +48,7 @@ const newPipes = setInterval(() => {
         const newPipe = document.createElement('img')
         newPipe.src = './images/pipe.png'
         newPipe.classList.add('pipe')
+        newPipe.style.animationDuration = window.innerWidth / 500 + 's'
 
         canvas.appendChild(newPipe)
     }
