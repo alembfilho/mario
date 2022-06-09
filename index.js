@@ -12,10 +12,10 @@ document.addEventListener('keydown', e => {
     }, 500)
 })
 
-const loop = setInterval(() => {
+const checkForCollision = setInterval(() => {
     const marioPosition = +window.getComputedStyle(mario).bottom.slice(0, -2)
 
-    const pipes = document.querySelectorAll('.pipe').forEach(pipe => {
+    document.querySelectorAll('.pipe').forEach(pipe => {
         const pipePosition = pipe.offsetLeft
         if (pipe.offsetLeft < 5) pipe.remove()
 
@@ -36,17 +36,19 @@ const loop = setInterval(() => {
             })
 
             playing = false
-            clearInterval(loop)
+            clearInterval(checkForCollision)
+            clearInterval(newPipes)
         }
     })
 
 }, 10)
 
-document.addEventListener('click', e => {
+const newPipes = setInterval(() => {
+    if (Math.random() < .4) {
+        const newPipe = document.createElement('img')
+        newPipe.src = './images/pipe.png'
+        newPipe.classList.add('pipe')
 
-    const newPipe = document.createElement('img')
-    newPipe.src = './images/pipe.png'
-    newPipe.classList.add('pipe')
-
-    canvas.appendChild(newPipe)
-})
+        canvas.appendChild(newPipe)
+    }
+}, 600)
